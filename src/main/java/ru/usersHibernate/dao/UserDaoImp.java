@@ -1,61 +1,55 @@
 package ru.usersHibernate.dao;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import ru.usersHibernate.model.User;
 
+import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@Repository
 public class UserDaoImp implements UserDao {
+   // private static Map<Integer, User> users = new HashMap<>();
+    private SessionFactory sessionFactory;
 
-    private static final AtomicInteger AUTO_ID = new AtomicInteger(0);
-    private static Map<Integer, User> users = new HashMap<>();
-
-    static {
-        User user1 = new User();
-        user1.setId(AUTO_ID.getAndIncrement());
-        user1.setName("Petya");
-        user1.setAge(22);
-        user1.setEmail("petya@milo.ru");
-        users.put(user1.getId(), user1);
-
-        User user2 = new User();
-        user2.setId(AUTO_ID.getAndIncrement());
-        user2.setName("Vasya");
-        user2.setAge(33);
-        user2.setEmail("vasya@milo.ru");
-        users.put(user2.getId(), user2);
+    @Autowired
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
 
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<User> allUsers() {
-        return new ArrayList<>(users.values());
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from User").getResultList();
+//        TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery("from User");
+//        return query.getResultList();
     }
 
     @Override
     public void add(User user) {
-        user.setId(AUTO_ID.getAndIncrement());
-        users.put(user.getId(), user);
     }
 
     @Override
     public void delete(int id) {
-        // users.remove(user.getId(id));
-        users.remove(id);
+
     }
 
     @Override
     public void edit(User user) {
-        users.put(user.getId(), user);
     }
 
     @Override
     public User getById(int id) {
-        return users.get(id);
+        return null;
     }
 
     @Override
