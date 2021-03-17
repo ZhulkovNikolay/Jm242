@@ -3,10 +3,7 @@ package ru.usersHibernate.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.usersHibernate.Service.UserService;
 import ru.usersHibernate.Service.UserServiceImp;
@@ -34,5 +31,17 @@ public class UsersController {
     public String edit(@PathVariable("id") int id, Model model) {
         model.addAttribute("user", userService.getById(id));
         return "edit";
+    }
+
+    @GetMapping("/new")
+    public String createNewUserHtmlFrom(Model model) {
+        model.addAttribute("user", new User());
+        return "new";
+    }
+
+    @PostMapping()
+    public String createUser(@ModelAttribute("user") User user) {
+        userService.add(user);
+        return "redirect:/index";
     }
 }
