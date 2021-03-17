@@ -7,8 +7,13 @@
 <body>
 <h2>Edit Page</h2>
 
-<p th:text="${user.getName()}">VALUE</p>
-<p th:text="${user.getId()}">VALUE</p>
+
+<form th:method="PATCH" th:action="@{/{id}(id=${user.getId()})}" th:object="${user}">
+    <label for="name">Enter name: </label>
+    <input type="text" th:field="*{name}" id="name"/>
+    <br/>
+    <input type="submit" value="Update!"/>
+</form>
 
 </body>
 </html>

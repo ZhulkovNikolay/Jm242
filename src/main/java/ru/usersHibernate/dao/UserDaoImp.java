@@ -57,4 +57,9 @@ public class UserDaoImp implements UserDao {
         return users.get(id);
     }
 
+    @Override
+    public void update(int id, User updatedUser) {
+        User userToBeUpdated = getById(id);
+        userToBeUpdated.setName(updatedUser.getName());
+    }
 }

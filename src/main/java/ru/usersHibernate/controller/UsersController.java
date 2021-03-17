@@ -34,8 +34,7 @@ public class UsersController {
     }
 
     @GetMapping("/new")
-    public String createNewUserHtmlFrom(Model model) {
-        model.addAttribute("user", new User());
+    public String createNewUserHtmlFrom(@ModelAttribute("user") User user) {
         return "new";
     }
 
@@ -44,4 +43,11 @@ public class UsersController {
         userService.add(user);
         return "redirect:/index";
     }
+
+    @PatchMapping("/{id}")
+    public String update(@ModelAttribute("user") User user, @PathVariable("id") int id) {
+        userService.update(id, user);
+        return "redirect:/index";
+    }
+
 }
