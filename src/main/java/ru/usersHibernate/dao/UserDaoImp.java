@@ -16,7 +16,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
 public class UserDaoImp implements UserDao {
-   // private static Map<Integer, User> users = new HashMap<>();
     private SessionFactory sessionFactory;
 
     @Autowired
@@ -30,26 +29,30 @@ public class UserDaoImp implements UserDao {
     public List<User> allUsers() {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("from User").getResultList();
-//        TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery("from User");
-//        return query.getResultList();
     }
 
     @Override
     public void add(User user) {
+        Session session = sessionFactory.getCurrentSession();
+        session.persist(user);
     }
 
     @Override
     public void delete(int id) {
-
+        Session session = sessionFactory.getCurrentSession();
+        session.delete(getById(id));
     }
 
     @Override
     public void edit(User user) {
+        Session session = sessionFactory.getCurrentSession();
+        session.update(user);
     }
 
     @Override
     public User getById(int id) {
-        return null;
+        Session session = sessionFactory.getCurrentSession();
+        return session.get(User.class, id);
     }
 
     @Override
