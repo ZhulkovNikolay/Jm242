@@ -43,8 +43,9 @@ public class UserDaoImp implements UserDao {
     }
 
     @Override
-    public void delete(User user) {
-        users.remove(user.getId());
+    public void delete(int id) {
+        // users.remove(user.getId(id));
+        users.remove(id);
     }
 
     @Override

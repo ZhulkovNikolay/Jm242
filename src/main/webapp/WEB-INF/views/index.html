@@ -21,14 +21,14 @@
     <td> <a th:text="${user.getName()}">name</a></td>
     <td> <a th:text="${user.getAge()}">age</a></td>
     <td> <a th:text="${user.getEmail()}">email</a></td>
-    <td>
-        <a th:href="@{/edit/{id}(id=${user.getId()})}">edit</a>
-    </td>
+    <td> <a th:href="@{/edit/{id}(id=${user.getId()})}">edit</a></td>
+    <td> <form th:method="DELETE" th:action="@{/{id}(id=${user.getId()})}"><input type="submit" value="Delete"/></form></td>
 </tr>
 </table>
 
-<h2>Add</h2>
-<a href="/new">Add new film</a>
+<br/>
+<hr/>
+<a href="/new">Add new user</a>
 
 </body>
 </html>
