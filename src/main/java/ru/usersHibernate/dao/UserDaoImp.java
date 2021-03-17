@@ -59,5 +59,7 @@ public class UserDaoImp implements UserDao {
     public void update(int id, User updatedUser) {
         User userToBeUpdated = getById(id);
         userToBeUpdated.setName(updatedUser.getName());
+        userToBeUpdated.setAge(updatedUser.getAge());
+        userToBeUpdated.setEmail(updatedUser.getEmail());
     }
 }
