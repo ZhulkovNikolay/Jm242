@@ -33,12 +33,6 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    @Transactional
-    public void edit(User user) {
-        userDao.edit(user);
-    }
-
-    @Override
     public User getById(int id) {
         return userDao.getById(id);
     }

@@ -23,14 +23,8 @@ public class UsersController {
         return "index";
     }
 
-    @GetMapping("/edit/{id}")
-    public String edit(@PathVariable("id") int id, Model model) {
-        model.addAttribute("user", userService.getById(id));
-        return "edit";
-    }
-
     @GetMapping("/new")
-    public String createNewUserHtmlFrom(@ModelAttribute("user") User user) {
+    public String createNewUserHtmlForm(@ModelAttribute("user") User user) {
         return "new";
     }
 
@@ -38,6 +32,12 @@ public class UsersController {
     public String createUser(@ModelAttribute("user") User user) {
         userService.add(user);
         return "redirect:/index";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String goToEditPage(@PathVariable("id") int id, Model model) {
+        model.addAttribute("user", userService.getById(id));
+        return "edit";
     }
 
     @PatchMapping("/{id}")
