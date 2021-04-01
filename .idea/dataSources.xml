@@ -10,6 +10,7 @@
       <driver-properties>
         <property name="serverTimezone" value="UTC" />
         <property name="allowPublicKeyRetrieval" value="TRUE" />
+        <property name="useSSL" value="FALSE" />
       </driver-properties>
     </data-source>
   </component>
